@@ -1,17 +1,10 @@
 {
   "printWidth": 100,
+  "tabWidth": 4,
   "bracketSameLine": true,
   "singleQuote": true,
   "trailingComma": "all",
   "arrowParens": "always",
   "endOfLine": "auto",
-  "semi": true,
-  "overrides": [
-    {
-      "files": "*.{js,jsx,ts,tsx,json,md,yml,yaml,css,less,graphql}",
-      "options": {
-        "tabWidth": 4
-      }
-    }
-  ]
+  "semi": true
 }
