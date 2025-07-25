@@ -1,14 +1,9 @@
-import { Entity, Column, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { User } from './user.model';
-import { id } from '@src/@types';
+import { BaseModel } from '@src/shared';
 
 @Entity('RefreshTokens')
-export class RefreshToken {
-    @PrimaryGeneratedColumn({
-        name: 'ID',
-    })
-    public id: id;
-
+export class RefreshToken extends BaseModel {
     @Column('varchar', {
         name: 'Token',
     })
@@ -29,20 +24,6 @@ export class RefreshToken {
         name: 'UserAgent',
     })
     public userAgent: string;
-
-    @Column('datetime', {
-        name: 'CreatedAt',
-        default: () => 'CURRENT_TIMESTAMP', // Use SQL's CURRENT_TIMESTAMP
-        onUpdate: 'CURRENT_TIMESTAMP', // Automatically update on create
-    })
-    public createdAt: Date;
-
-    @Column('datetime', {
-        name: 'UpdatedAt',
-        default: () => 'CURRENT_TIMESTAMP', // Use SQL's CURRENT_TIMESTAMP
-        onUpdate: 'CURRENT_TIMESTAMP', // Automatically update on updates
-    })
-    public updatedAt: Date;
 
     @ManyToOne(() => User, (user) => user.refreshTokens)
     @JoinColumn({ name: 'UserID' })

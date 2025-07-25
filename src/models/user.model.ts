@@ -1,20 +1,12 @@
-import { id } from '@src/@types';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, OneToMany, OneToOne, JoinColumn } from 'typeorm';
 import { RefreshToken } from './refresh-token.model';
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { Organization } from './organization.model';
+import { BaseModel } from '@src/shared';
 
 @ObjectType()
 @Entity('Users')
-export class User {
-    @Field(() => ID, {
-        description: 'A globally-unique ID.',
-    })
-    @PrimaryGeneratedColumn({
-        name: 'ID',
-    })
-    public id: id;
-
+export class User extends BaseModel {
     @Field({
         description: "The user's email address.",
     })
@@ -50,26 +42,6 @@ export class User {
         name: 'Phone',
     })
     public phone?: string;
-
-    @Field({
-        description: 'The date time when the user was created.',
-    })
-    @Column('datetime', {
-        name: 'CreatedAt',
-        default: () => 'CURRENT_TIMESTAMP', // Use SQL's CURRENT_TIMESTAMP
-        onUpdate: 'CURRENT_TIMESTAMP', // Automatically update on updates
-    })
-    public createdAt: Date;
-
-    @Field({
-        description: 'The date time when the user was last updated.',
-    })
-    @Column('datetime', {
-        name: 'UpdatedAt',
-        default: () => 'CURRENT_TIMESTAMP', // Use SQL's CURRENT_TIMESTAMP
-        onUpdate: 'CURRENT_TIMESTAMP', // Automatically update on updates
-    })
-    public updatedAt: Date;
 
     @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user, {
         cascade: true,

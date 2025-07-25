@@ -13,7 +13,7 @@ import { ExceptionCause } from '@src/constants';
 export abstract class BaseService<TEntity extends BaseModel> {
     protected model: Repository<TEntity>;
 
-    public async findAll(options?: FindManyOptions<TEntity> | undefined): Promise<TEntity[]> {
+    public async findAll(options?: FindManyOptions<TEntity>): Promise<TEntity[]> {
         return await this.model.find(options);
     }
 
