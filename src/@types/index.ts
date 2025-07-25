@@ -7,7 +7,7 @@ export enum Env {
     DEVELOPMENT = 'development',
 }
 
-export interface IConfig {
+export interface Config {
     env: Env;
     isProduction: boolean;
     port: number;
